@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Manges – Smart Budget Planner</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-wallet"></i> Expense Manges</h1>
+            <p>Smart budget planner – manage money day by day</p>
+        </header>
+
+        <!-- 1) Budget Setup -->
+        <section class="budget-setup card">
+            <h2><i class="fas fa-cog"></i> Set Monthly Budget</h2>
+            <div class="budget-input-group">
+                <label for="monthly-budget">Monthly Budget (₹)</label>
+                <input type="number" id="monthly-budget" placeholder="10000" min="1" step="0.01" />
+                <button id="set-budget-btn" class="btn btn-primary">
+                    <i class="fas fa-check"></i> Set
+                </button>
+            </div>
+        </section>
+
+        <!-- 2) Summary Cards -->
+        <section class="summary-section">
+            <div class="summary-cards">
+                <div class="summary-card card">
+                    <h3><i class="fas fa-calendar-alt"></i> Monthly Budget</h3>
+                    <div class="amount" id="monthly-budget-display">₹0</div>
+                    <div class="sub-info">Daily Target: <span id="daily-target">₹0</span></div>
+                </div>
+                <div class="summary-card card">
+                    <h3><i class="fas fa-credit-card"></i> Total Spent</h3>
+                    <div class="amount spent" id="total-spent">₹0</div>
+                    <div class="sub-info">Avg / Day: <span id="avg-daily-spend">₹0</span></div>
+                </div>
+                <div class="summary-card card">
+                    <h3><i class="fas fa-piggy-bank"></i> Remaining</h3>
+                    <div class="amount remaining" id="remaining-money">₹0</div>
+                    <div class="sub-info">Days Left: <span id="days-left">0</span></div>
+                </div>
+                <div class="summary-card card">
+                    <h3><i class="fas fa-chart-line"></i> Stats</h3>
+                    <div class="stat-row">
+                        Over-Budget Days: <span id="over-budget-days">0</span>
+                    </div>
+                    <div class="stat-row">
+                        Highest Spend: <span id="highest-spend">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3) Add Expense Form -->
+        <section class="expense-form-section card">
+            <h2><i class="fas fa-plus-circle"></i> Add New Expense</h2>
+            <form id="expense-form" class="expense-form">
+                <div class="form-group">
+                    <label for="expense-description">Description</label>
+                    <input type="text" id="expense-description" placeholder="E.g. Grocery shopping" required />
+                </div>
+                <div class="form-group">
+                    <label for="expense-amount">Amount (₹)</label>
+                    <input type="number" id="expense-amount" placeholder="0.00" min="0.01" step="0.01" required />
+                </div>
+                <div class="form-group">
+                    <label for="expense-category">Category</label>
+                    <select id="expense-category" required>
+                        <option value="">Select…</option>
+                        <option>Food</option>
+                        <option>Transportation</option>
+                        <option>Shopping</option>
+                        <option>Bills</option>
+                        <option>Entertainment</option>
+                        <option>Healthcare</option>
+                        <option>Education</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="expense-date">Date</label>
+                    <input type="date" id="expense-date" required />
+                </div>
+                <button type="submit" class="btn btn-success btn-full">
+                    <i class="fas fa-plus"></i> Add Expense
+                </button>
+            </form>
+        </section>
+
+        <!-- 4) Expense History -->
+        <section class="expense-list-section card">
+            <div class="section-header">
+                <h2><i class="fas fa-list"></i> Expense History</h2>
+                <div class="filter-controls">
+                    <select id="filter-category">
+                        <option value="">All Categories</option>
+                        <option>Food</option>
+                        <option>Transportation</option>
+                        <option>Shopping</option>
+                        <option>Bills</option>
+                        <option>Entertainment</option>
+                        <option>Healthcare</option>
+                        <option>Education</option>
+                        <option>Other</option>
+                    </select>
+                    <button id="clear-all-btn" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+            </div>
+            <div id="expense-list" class="expense-list">
+                <div id="no-expenses-message" class="no-expenses">
+                    <i class="fas fa-receipt"></i>
+                    <p>No expenses yet. Add one above!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5) Quick Stats -->
+        <section class="quick-stats card">
+            <h2><i class="fas fa-tachometer-alt"></i> Quick Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <i class="fas fa-calendar-day"></i>
+                    <div>
+                        <span class="stat-label">Today</span>
+                        <span id="today-spending" class="stat-value">₹0</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-calendar-week"></i>
+                    <div>
+                        <span class="stat-label">This Week</span>
+                        <span id="week-spending" class="stat-value">₹0</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-percentage"></i>
+                    <div>
+                        <span class="stat-label">Budget Used</span>
+                        <span id="budget-percentage" class="stat-value">0%</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-hourglass-half"></i>
+                    <div>
+                        <span class="stat-label">Days Left</span>
+                        <span id="days-remaining" class="stat-value">0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="notification-container"></div>
+    <script src="scrpit.js"></script>
+</body>
+
+</html>
